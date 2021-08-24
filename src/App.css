@@ -1,0 +1,24 @@
+.cstm-bg-dark {
+    color: white;
+    background-color: rgb(32, 37, 53);
+}
+
+.cstm-bg-light {
+    color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+.cstm-bg-success {
+    color: black;
+    background-color: rgb(150, 230, 140);
+}
+
+.cstm-bg-info {
+    color: black;
+    background-color: #a9d8e7;
+}
+
+.cstm-bg-warning {
+    color: black;
+    background-color: rgb(233, 209, 131);
+}
