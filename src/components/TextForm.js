@@ -29,6 +29,10 @@ export default function TextForm(props) {
         setText(newText)
         props.showAlert('The duplicate words are removed from the text.', 'success');
     }
+    const onCopyClick = (e) => {
+        navigator.clipboard.writeText(text);
+        props.showAlert('Text copied!', 'success');
+    }
     const onClearClick = (e) => {
         setText('');
         props.showAlert('The text is cleared!', 'success');
@@ -56,18 +60,19 @@ export default function TextForm(props) {
                 <div className="mb-3">
                     <textarea className="form-control" value={text} onChange={onTextChange} rows="14" style={textAreaStyle}></textarea>
                 </div>
-                <button className={`btn btn-${props.theme} mx-1`} onClick={onUpperCaseClick}>Convert To Uppper Case</button>
-                <button className={`btn btn-${props.theme} mx-1`} onClick={onLowerCaseClick}>Convert To Lower Case</button>
-                <button className={`btn btn-${props.theme} mx-1`} onClick={onRemoveDuplicatesClick}>Remove Duplicates</button>
-                <button className={`btn btn-${props.theme} mx-1`} onClick={onRemoveExtraSpacesClick}>Remove Extra Spaces</button>
-                <button className={`btn btn-${props.theme} mx-1`} onClick={onClearClick}>Clear</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} mx-1 my-1`} onClick={onUpperCaseClick}>Convert To Uppper Case</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} mx-1 my-1`} onClick={onLowerCaseClick}>Convert To Lower Case</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} mx-1 my-1`} onClick={onRemoveDuplicatesClick}>Remove Duplicates</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} mx-1 my-1`} onClick={onRemoveExtraSpacesClick}>Remove Extra Spaces</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} mx-1 my-1`} onClick={onCopyClick}>Copy Text</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} mx-1 my-1`} onClick={onClearClick}>Clear</button>
             </div>
             <div className="container my-2">
                 <h2>Your text summary</h2>
-                <p>{text.split(' ').filter(w => w).length} words and {text.length} characters</p>
-                <p>{0.008 * text.split(' ').length} Minutes read</p>
+                <p>{text.split(/\s+/).filter(w => w).length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(' ').filter(w => w).length} Minutes read</p>
                 <h2>Preview</h2>
-                <p>{text.length > 0 ? text : 'Enter some above text to preview it here!'}</p>
+                <p>{text.length > 0 ? text : 'Nothing to preview!'}</p>
             </div>
         </>
     )
